@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "releaseDate": "2025-09-28T10:00:00Z",
+  "platforms": {
+    "win32": {
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-x64.exe",
+      "checksum": "",
+      "size": 0
+    },
+    "darwin": {
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-mac-x64.dmg",
+      "checksum": "",
+      "size": 0
+    },
+    "linux": {
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-linux-x64.AppImage",
+      "checksum": "",
+      "size": 0
+    }
+  },
+  "releaseNotes": "Initial release",
+  "critical": false,
+  "minVersion": "1.0.0"
+}
