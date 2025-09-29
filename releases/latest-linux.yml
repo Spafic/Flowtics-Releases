@@ -1,9 +1,9 @@
 version: 1.0.5-beta.1
 files:
   - url: flowtics-v1.0.5-beta.1-linux-x86_64.AppImage
-    sha512: 1hLs1omdbEywaLRRtRqnsOIjHfMxuVJR2889tAeIPi8wyUZSIZy7iD86oZeJ0bi7bcb2a2IkB6c8EyCfSOjSMw==
-    size: 130114846
-    blockMapSize: 136498
+    sha512: JF3JdPNiuD4EptgsMVuGE/ZrpFU55rIx9yk0DzRIeakCT4lhTxvm69Hu/yw6fMRBaK7vlUmUK07rgbQUrNFg8w==
+    size: 130114883
+    blockMapSize: 136535
 path: flowtics-v1.0.5-beta.1-linux-x86_64.AppImage
-sha512: 1hLs1omdbEywaLRRtRqnsOIjHfMxuVJR2889tAeIPi8wyUZSIZy7iD86oZeJ0bi7bcb2a2IkB6c8EyCfSOjSMw==
-releaseDate: '2025-09-29T17:23:45.732Z'
+sha512: JF3JdPNiuD4EptgsMVuGE/ZrpFU55rIx9yk0DzRIeakCT4lhTxvm69Hu/yw6fMRBaK7vlUmUK07rgbQUrNFg8w==
+releaseDate: '2025-09-29T18:20:26.167Z'

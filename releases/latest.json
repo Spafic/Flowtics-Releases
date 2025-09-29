@@ -1,24 +1,24 @@
 {
-  "version": "1.0.5-beta.1",
-  "releaseDate": "2025-09-29T17:31:19.478Z",
+  "version": "1.0.6-beta.1",
+  "releaseDate": "2025-09-29T18:26:56.700Z",
   "platforms": {
     "linux": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.5-beta.1/flowtics-v1.0.5-beta.1-linux-x86_64.AppImage",
-      "checksum": "sha256:dbd9b23e9f4b070384b670bc9e7d0d3646ee3e2de39ab3d33b7a4c10484e5c8e",
-      "size": 130114846
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.6-beta.1/flowtics-v1.0.5-beta.1-linux-x86_64.AppImage",
+      "checksum": "sha256:dd7f6ce1ed19a9d357cd5fce30c0d814cb7be6665fdc367be69ab4f0f6a3f9bf",
+      "size": 130114883
     },
     "darwin": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.5-beta.1/flowtics-v1.0.5-beta.1-mac-x64.dmg",
-      "checksum": "sha256:d73c1e991d7a2524f23f2b8a2836d360d1952b933f5fe6751279cc5b2d50a2ae",
-      "size": 149964529
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.6-beta.1/flowtics-v1.0.5-beta.1-mac-x64.dmg",
+      "checksum": "sha256:40ad29d679306b7474f76ece0890a58c7f1753c5dcf6430e1a620d0db008ee91",
+      "size": 150037800
     },
     "win32": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.5-beta.1/flowtics-v1.0.5-beta.1-win.exe",
-      "checksum": "sha256:9a41dcadf257e4cf1ad6ed1c925cb5de6e868eab6f537c00d1a43c08913927e2",
-      "size": 239976029
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.6-beta.1/flowtics-v1.0.5-beta.1-win.exe",
+      "checksum": "sha256:1ac377f4dc4e6270912f5e5c2c1eacc5a82e2998acf02e50c525da75c74f0acb",
+      "size": 239975293
     }
   },
   "releaseNotes": "This is a beta release for testing purposes.",
   "critical": false,
-  "minVersion": "1.0.5-beta.1"
+  "minVersion": "1.0.6-beta.1"
 }
