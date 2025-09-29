@@ -1,14 +1,14 @@
-version: 1.0.1
+version: 1.0.2
 files:
-  - url: flowtics-v1.0.1-win.exe
-    sha512: 0dCDCx/q/rBirA5H0ZW2ihiSalXvFDbJ41WFZF0iQTZPy2tBW+X7Sd6/8LbyIKOMg+7pg26Q0Mb4HhxdxbVu9w==
-    size: 239978085
-  - url: flowtics-v1.0.1-win-x64.exe
-    sha512: 5noF6ZodrkjhG9STpDnvn945IBUX94ixEEO+RDa03GnON9LPej8qICe+UNncxvJeZxFgtJlnGuuGzxjr26kpIw==
-    size: 123274143
-  - url: flowtics-v1.0.1-win-ia32.exe
-    sha512: XmejYrGm1IRKQL8lHL+9Vvl/2T2KPIvbLAQfQwHIGZotIrgJ/EMGyaSevF9sPVqkfLd+NCPL9WsmdG2v57hG2g==
-    size: 117269501
-path: flowtics-v1.0.1-win.exe
-sha512: 0dCDCx/q/rBirA5H0ZW2ihiSalXvFDbJ41WFZF0iQTZPy2tBW+X7Sd6/8LbyIKOMg+7pg26Q0Mb4HhxdxbVu9w==
-releaseDate: '2025-09-29T19:10:04.970Z'
+  - url: flowtics-v1.0.2-win.exe
+    sha512: DYfBw9wvitT5vJMlrhJYPfY32Lcu3qWFzxFOG9fR8A1Wf0ee7x1Yp4SLwr7ouP2nfYrG4MpGi3+YnNe/cyPsOQ==
+    size: 239979041
+  - url: flowtics-v1.0.2-win-x64.exe
+    sha512: f86aqzpOrzObZxZ+Th5q8tv5iok5vjULVLWoaIhOkD7ZkvgDTBxWCNFYa7lBUtrgWK8NZ5+W66MsbzxFZqR8XQ==
+    size: 123274556
+  - url: flowtics-v1.0.2-win-ia32.exe
+    sha512: 3M/K1o5yRbcbf8Mzg8M9FquSn3qrTZ9hW/V8x/biC9GS9WJwKou+uPVi1lGVtVkwFg+/UKMvn5utt4Aythq9Rg==
+    size: 117270041
+path: flowtics-v1.0.2-win.exe
+sha512: DYfBw9wvitT5vJMlrhJYPfY32Lcu3qWFzxFOG9fR8A1Wf0ee7x1Yp4SLwr7ouP2nfYrG4MpGi3+YnNe/cyPsOQ==
+releaseDate: '2025-09-29T19:33:30.317Z'
