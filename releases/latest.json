@@ -1,24 +1,24 @@
 {
-  "version": "1.0.2",
-  "releaseDate": "2025-09-29T19:35:02.757Z",
+  "version": "1.0.7",
+  "releaseDate": "2025-09-30T23:10:18.674Z",
   "platforms": {
     "linux": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.2/flowtics-v1.0.2-linux-x86_64.AppImage",
-      "checksum": "sha256:2c567f0329bcab75f7bc3ecd0bbf9829915602820683f0c9856785f9245d57db",
-      "size": 130114885
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.7/flowtics-v1.0.2-linux-x86_64.AppImage",
+      "checksum": "sha256:86a7f316b4dc538bcd68758d9c3fdd7ab61a365bf8c10c761a1254df3d502466",
+      "size": 159952865
     },
     "darwin": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.2/flowtics-v1.0.2-mac-x64.dmg",
-      "checksum": "sha256:d50aa82801241ea4c855369e2978f22f81a615c556c35b3149cc17f8dba59385",
-      "size": 149872379
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.7/flowtics-v1.0.2-mac-x64.dmg",
+      "checksum": "sha256:652bf50ef9abf75d5d3705336fb04a40893d16e929cee603aa9762cc40d6cd23",
+      "size": 438588730
     },
     "win32": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.2/flowtics-v1.0.2-win.exe",
-      "checksum": "sha256:58b2b94140758ed45751811cd648f3348cf40c500167a876d76c1fc94ab3d272",
-      "size": 239979041
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.7/flowtics-v1.0.2-win.exe",
+      "checksum": "sha256:65ce0e75b3dfbf74b1f70e8c1a0375af8061151e49d63d2bff85424c728fd449",
+      "size": 1138974786
     }
   },
   "releaseNotes": "New stable release with improvements and bug fixes.",
   "critical": false,
-  "minVersion": "1.0.2"
+  "minVersion": "1.0.7"
 }
