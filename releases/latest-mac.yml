@@ -1,11 +1,11 @@
 version: 1.0.0
 files:
   - url: flowtics-v1.0.0-mac-x64.dmg
-    sha512: lMUd4F7xmBZKdp7FaaRLZEe9r9YGEtuAeMGn8mnAG8HPuW/khNhVrK8leDUMZQnOTBKDmZOoRgUluQ3qOnSYXw==
-    size: 438558353
+    sha512: ZtM+GLryCclQSEwV0JxmJQ1CARPQEc+enV1G6m8KRpjmLsvxpQtRAe40XuFy1WE9O6zzJD2klJM3wkxwxMt5ag==
+    size: 438821956
   - url: flowtics-v1.0.0-mac-arm64.dmg
-    sha512: qgpt2OSP0n4G/+khKs4aiT1Bi3l0ao2jWkhs9dBG0fxS2i4bQcZNYQ7gijWNvO45VUC1lhWPO2yyJqjFGy+36g==
-    size: 435466105
+    sha512: wJmNSncu08V+8vcpH9Dwn+OKzDI8QlnMBQQj4la5r5Eb/K7AIadob7gSmCPnbS/zO/J3KX7GarxW2Xh9txBF1A==
+    size: 434994788
 path: flowtics-v1.0.0-mac-x64.dmg
-sha512: lMUd4F7xmBZKdp7FaaRLZEe9r9YGEtuAeMGn8mnAG8HPuW/khNhVrK8leDUMZQnOTBKDmZOoRgUluQ3qOnSYXw==
-releaseDate: '2025-10-02T19:42:48.527Z'
+sha512: ZtM+GLryCclQSEwV0JxmJQ1CARPQEc+enV1G6m8KRpjmLsvxpQtRAe40XuFy1WE9O6zzJD2klJM3wkxwxMt5ag==
+releaseDate: '2025-10-02T21:04:40.225Z'
