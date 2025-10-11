@@ -58,28 +58,29 @@ async function loadReleaseInfo() {
     const data = await response.json();
 
     // Update version text
-    document.getElementById(
-      "version-text"
-    ).textContent = `Version ${data.version}`;
-    document.getElementById("version-number").textContent = data.version;
+    const versionText = document.getElementById("version-text");
+    const versionNumber = document.getElementById("version-number");
+    const releaseNotes = document.getElementById("release-notes");
 
-    // Update release date
-    document.getElementById("release-date").textContent = formatDate(
-      data.releaseDate
-    );
-
-    // Update release notes
-    document.getElementById("release-notes").textContent =
-      data.releaseNotes || "No release notes available";
+    if (versionText) {
+      versionText.textContent = `Version ${data.version}`;
+    }
+    if (versionNumber) {
+      versionNumber.textContent = data.version;
+    }
+    if (releaseNotes) {
+      releaseNotes.textContent =
+        data.releaseNotes || "No release notes available";
+    }
 
     // Clear and populate download sections
     const windowsContainer = document.getElementById("windows-downloads");
     const macContainer = document.getElementById("mac-downloads");
     const linuxContainer = document.getElementById("linux-downloads");
 
-    windowsContainer.innerHTML = "";
-    macContainer.innerHTML = "";
-    linuxContainer.innerHTML = "";
+    if (windowsContainer) windowsContainer.innerHTML = "";
+    if (macContainer) macContainer.innerHTML = "";
+    if (linuxContainer) linuxContainer.innerHTML = "";
 
     // Group platforms by OS
     const platforms = data.platforms;
@@ -89,19 +90,23 @@ async function loadReleaseInfo() {
 
       const downloadCard = createDownloadCard(key, platform, data.version);
 
-      if (key.startsWith("win")) {
+      if (key.startsWith("win") && windowsContainer) {
         windowsContainer.appendChild(downloadCard);
-      } else if (key.startsWith("mac")) {
+      } else if (key.startsWith("mac") && macContainer) {
         macContainer.appendChild(downloadCard);
-      } else if (key.startsWith("linux")) {
+      } else if (key.startsWith("linux") && linuxContainer) {
         linuxContainer.appendChild(downloadCard);
       }
     }
 
     // Hide loading state and show download buttons
-    document.getElementById("loading-state").classList.add("hidden");
-    document.getElementById("download-buttons").classList.remove("hidden");
-    document.getElementById("release-info").classList.remove("hidden");
+    const loadingState = document.getElementById("loading-state");
+    const downloadButtons = document.getElementById("download-buttons");
+    const releaseInfo = document.getElementById("release-info");
+
+    if (loadingState) loadingState.classList.add("hidden");
+    if (downloadButtons) downloadButtons.classList.remove("hidden");
+    if (releaseInfo) releaseInfo.classList.remove("hidden");
   } catch (error) {
     console.error("Error loading release info:", error);
     showError(
