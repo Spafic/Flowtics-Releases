@@ -213,8 +213,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add smooth scroll behavior
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      // Skip if it's just "#" or if element has download functionality
+      if (href === "#" || this.id.includes("download")) {
+        return;
+      }
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
+      const target = document.querySelector(href);
       if (target) {
         target.scrollIntoView({
           behavior: "smooth",
