@@ -72,50 +72,29 @@ async function loadReleaseInfo() {
     document.getElementById("release-notes").textContent =
       data.releaseNotes || "No release notes available";
 
-    // Update download links
-    const platforms = {
-      windows: {
-        element: "windows-download",
-        sizeElement: "windows-size",
-        data: data.platforms.win32,
-      },
-      macos: {
-        element: "macos-download",
-        sizeElement: "macos-size",
-        data: data.platforms.darwin,
-      },
-      linux: {
-        element: "linux-download",
-        sizeElement: "linux-size",
-        data: data.platforms.linux,
-      },
-    };
+    // Clear and populate download sections
+    const windowsContainer = document.getElementById("windows-downloads");
+    const macContainer = document.getElementById("mac-downloads");
+    const linuxContainer = document.getElementById("linux-downloads");
 
-    // Update each platform's download link
-    for (const [platform, config] of Object.entries(platforms)) {
-      const downloadElement = document.getElementById(config.element);
-      const sizeElement = document.getElementById(config.sizeElement);
+    windowsContainer.innerHTML = "";
+    macContainer.innerHTML = "";
+    linuxContainer.innerHTML = "";
 
-      if (config.data && config.data.url) {
-        downloadElement.href = config.data.url;
-        downloadElement.addEventListener("click", () => {
-          trackDownload(platform, data.version);
-        });
+    // Group platforms by OS
+    const platforms = data.platforms;
 
-        // Update size if available
-        if (config.data.size) {
-          sizeElement.textContent = formatBytes(config.data.size);
-        }
-      } else {
-        downloadElement.classList.add("opacity-50", "cursor-not-allowed");
-        downloadElement.addEventListener("click", (e) => {
-          e.preventDefault();
-          alert(
-            `${
-              platform.charAt(0).toUpperCase() + platform.slice(1)
-            } version is not available yet.`
-          );
-        });
+    for (const [key, platform] of Object.entries(platforms)) {
+      if (!platform.url) continue;
+
+      const downloadCard = createDownloadCard(key, platform, data.version);
+
+      if (key.startsWith("win")) {
+        windowsContainer.appendChild(downloadCard);
+      } else if (key.startsWith("mac")) {
+        macContainer.appendChild(downloadCard);
+      } else if (key.startsWith("linux")) {
+        linuxContainer.appendChild(downloadCard);
       }
     }
 
@@ -123,9 +102,6 @@ async function loadReleaseInfo() {
     document.getElementById("loading-state").classList.add("hidden");
     document.getElementById("download-buttons").classList.remove("hidden");
     document.getElementById("release-info").classList.remove("hidden");
-
-    // Highlight recommended platform
-    highlightRecommendedPlatform();
   } catch (error) {
     console.error("Error loading release info:", error);
     showError(
@@ -135,25 +111,37 @@ async function loadReleaseInfo() {
   }
 }
 
+// Create download card element
+function createDownloadCard(key, platform, version) {
+  const card = document.createElement("a");
+  card.href = platform.url;
+  card.className =
+    "download-card block bg-white hover:bg-gray-50 border border-gray-200 hover:border-blue-400 rounded-lg p-4 transition-all duration-200 hover:shadow-md";
+
+  const size = platform.size ? formatBytes(platform.size) : "Size unknown";
+
+  card.innerHTML = `
+    <div class="flex items-center justify-between">
+      <div class="flex-1">
+        <div class="font-medium text-gray-900">${platform.label || key}</div>
+        <div class="text-sm text-gray-500 mt-1">${size}</div>
+      </div>
+      <div class="ml-4">
+        <i class="fas fa-download text-blue-600 text-lg"></i>
+      </div>
+    </div>
+  `;
+
+  card.addEventListener("click", () => {
+    trackDownload(key, version);
+  });
+
+  return card;
+}
+
 // Highlight recommended platform based on user's OS
 function highlightRecommendedPlatform() {
-  const platform = detectPlatform();
-  const platformMap = {
-    windows: "windows-download",
-    macos: "macos-download",
-    linux: "linux-download",
-  };
-
-  const elementId = platformMap[platform];
-  if (elementId) {
-    const element = document.getElementById(elementId);
-    const badge = document.createElement("span");
-    badge.className =
-      "absolute top-2 right-2 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-semibold pulse-animation";
-    badge.innerHTML = '<i class="fas fa-star mr-1"></i>Recommended';
-    element.style.position = "relative";
-    element.appendChild(badge);
-  }
+  // Removed - no longer highlighting recommended platform
 }
 
 // Track download (you can extend this to send analytics)

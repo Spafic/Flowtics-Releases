@@ -1,24 +1,45 @@
 {
   "version": "1.0.0",
-  "releaseDate": "2025-10-04T14:56:39.859Z",
+  "releaseDate": "2025-10-11T10:00:00Z",
   "platforms": {
-    "win32": {
+    "win-x64": {
       "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-x64.exe",
       "checksum": "",
-      "size": 0
+      "size": 0,
+      "label": "Windows 64-bit"
     },
-    "darwin": {
+    "win-ia32": {
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-ia32.exe",
+      "checksum": "",
+      "size": 0,
+      "label": "Windows 32-bit"
+    },
+    "win-arm64": {
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-arm64.exe",
+      "checksum": "",
+      "size": 0,
+      "label": "Windows ARM64"
+    },
+    "mac-x64": {
       "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-mac-x64.dmg",
       "checksum": "",
-      "size": 0
+      "size": 0,
+      "label": "macOS Intel"
     },
-    "linux": {
+    "mac-arm64": {
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-mac-arm64.dmg",
+      "checksum": "",
+      "size": 0,
+      "label": "macOS Apple Silicon"
+    },
+    "linux-x64": {
       "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-linux-x64.AppImage",
       "checksum": "",
-      "size": 0
+      "size": 0,
+      "label": "Linux x64"
     }
   },
-  "releaseNotes": "New stable release with improvements and bug fixes.",
+  "releaseNotes": "Initial stable release with core inventory management features.",
   "critical": false,
   "minVersion": "1.0.0"
 }
