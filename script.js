@@ -57,7 +57,7 @@ async function loadReleaseInfo() {
 
     const data = await response.json();
 
-    // Update version text
+    // Update version text safely
     const versionText = document.getElementById("version-text");
     const versionNumber = document.getElementById("version-number");
     const releaseNotes = document.getElementById("release-notes");
@@ -73,30 +73,64 @@ async function loadReleaseInfo() {
         data.releaseNotes || "No release notes available";
     }
 
-    // Clear and populate download sections
+    // Get download sections
     const windowsContainer = document.getElementById("windows-downloads");
     const macContainer = document.getElementById("mac-downloads");
     const linuxContainer = document.getElementById("linux-downloads");
 
+    // Get section wrappers
+    const windowsSection = windowsContainer?.closest(".download-section");
+    const macSection = macContainer?.closest(".download-section");
+    const linuxSection = linuxContainer?.closest(".download-section");
+
+    // Clear containers
     if (windowsContainer) windowsContainer.innerHTML = "";
     if (macContainer) macContainer.innerHTML = "";
     if (linuxContainer) linuxContainer.innerHTML = "";
 
-    // Group platforms by OS
-    const platforms = data.platforms;
+    // Track if we have any downloads for each platform
+    let hasWindows = false;
+    let hasMac = false;
+    let hasLinux = false;
 
-    for (const [key, platform] of Object.entries(platforms)) {
-      if (!platform.url) continue;
+    // Check if platforms exist and is an object
+    if (data.platforms && typeof data.platforms === "object") {
+      // Group platforms by OS
+      for (const [key, platform] of Object.entries(data.platforms)) {
+        // Skip if no URL or empty URL
+        if (!platform || !platform.url || platform.url.trim() === "") continue;
 
-      const downloadCard = createDownloadCard(key, platform, data.version);
+        const downloadCard = createDownloadCard(key, platform, data.version);
 
-      if (key.startsWith("win") && windowsContainer) {
-        windowsContainer.appendChild(downloadCard);
-      } else if (key.startsWith("mac") && macContainer) {
-        macContainer.appendChild(downloadCard);
-      } else if (key.startsWith("linux") && linuxContainer) {
-        linuxContainer.appendChild(downloadCard);
+        if (key.startsWith("win") && windowsContainer) {
+          windowsContainer.appendChild(downloadCard);
+          hasWindows = true;
+        } else if (key.startsWith("mac") && macContainer) {
+          macContainer.appendChild(downloadCard);
+          hasMac = true;
+        } else if (key.startsWith("linux") && linuxContainer) {
+          linuxContainer.appendChild(downloadCard);
+          hasLinux = true;
+        }
       }
+    }
+
+    // Show/hide sections based on available downloads
+    if (windowsSection) {
+      windowsSection.style.display = hasWindows ? "block" : "none";
+    }
+    if (macSection) {
+      macSection.style.display = hasMac ? "block" : "none";
+    }
+    if (linuxSection) {
+      linuxSection.style.display = hasLinux ? "block" : "none";
+    }
+
+    // Check if we have any downloads at all
+    const hasAnyDownloads = hasWindows || hasMac || hasLinux;
+
+    if (!hasAnyDownloads) {
+      throw new Error("No release downloads are currently available");
     }
 
     // Hide loading state and show download buttons
@@ -123,7 +157,7 @@ function createDownloadCard(key, platform, version) {
   card.className =
     "download-card block bg-white hover:bg-gray-50 border border-gray-200 hover:border-blue-400 rounded-lg p-4 transition-all duration-200 hover:shadow-md";
 
-  const size = platform.size ? formatBytes(platform.size) : "Size unknown";
+  const size = platform.size ? formatBytes(platform.size) : "Download";
 
   card.innerHTML = `
     <div class="flex items-center justify-between">
@@ -137,7 +171,13 @@ function createDownloadCard(key, platform, version) {
     </div>
   `;
 
-  card.addEventListener("click", () => {
+  card.addEventListener("click", (e) => {
+    // Check if URL is valid before allowing download
+    if (!platform.url || platform.url === "" || platform.url === "#") {
+      e.preventDefault();
+      alert("This installer is not yet available. Please check back later.");
+      return;
+    }
     trackDownload(key, version);
   });
 
