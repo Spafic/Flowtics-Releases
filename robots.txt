@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://spafic.github.io/Flowtics-Releases/sitemap.xml
