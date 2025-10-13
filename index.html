@@ -166,6 +166,25 @@
                 </div>
               </div>
             </div>
+
+            <!-- Platform Availability Notice -->
+            <div
+              class="mt-6 p-4 bg-amber-50 rounded-lg hidden"
+              id="platform-notice"
+            >
+              <div class="flex items-start space-x-3">
+                <i class="fas fa-exclamation-triangle text-amber-600 mt-1"></i>
+                <div>
+                  <div class="font-semibold text-amber-900 mb-1">
+                    Platform Availability
+                  </div>
+                  <div
+                    class="text-amber-800 text-sm"
+                    id="platform-notice-text"
+                  ></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -224,67 +243,17 @@
       </div>
 
       <!-- Installation Instructions -->
-      <div class="max-w-4xl mx-auto mb-16">
+      <div class="max-w-4xl mx-auto mb-16" id="installation-section">
         <div class="glass-card rounded-3xl shadow-2xl p-8 md:p-12">
           <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
             <i class="fas fa-book text-blue-600 mr-3"></i>
             Installation Instructions
           </h3>
-          <div class="space-y-6">
-            <div>
-              <h4 class="font-semibold text-slate-900 mb-2 flex items-center">
-                <i class="fab fa-windows text-blue-600 mr-2"></i>
-                Windows
-              </h4>
-              <ol
-                class="list-decimal list-inside text-slate-600 space-y-1 ml-6"
-              >
-                <li>Download the .exe installer</li>
-                <li>Run the installer and follow the setup wizard</li>
-                <li>
-                  Launch Flowtics from your Start menu or desktop shortcut
-                </li>
-              </ol>
-            </div>
-
-            <div>
-              <h4 class="font-semibold text-slate-900 mb-2 flex items-center">
-                <i class="fab fa-apple text-slate-700 mr-2"></i>
-                macOS
-              </h4>
-              <ol
-                class="list-decimal list-inside text-slate-600 space-y-1 ml-6"
-              >
-                <li>Download the .dmg file</li>
-                <li>
-                  Open the .dmg and drag Flowtics to your Applications folder
-                </li>
-                <li>Launch Flowtics from Applications</li>
-              </ol>
-            </div>
-
-            <div>
-              <h4 class="font-semibold text-slate-900 mb-2 flex items-center">
-                <i class="fab fa-linux text-orange-500 mr-2"></i>
-                Linux
-              </h4>
-              <ol
-                class="list-decimal list-inside text-slate-600 space-y-1 ml-6"
-              >
-                <li>Download the .AppImage file</li>
-                <li>
-                  Make it executable:
-                  <code class="bg-slate-100 px-2 py-1 rounded text-sm"
-                    >chmod +x flowtics-*.AppImage</code
-                  >
-                </li>
-                <li>
-                  Run the AppImage:
-                  <code class="bg-slate-100 px-2 py-1 rounded text-sm"
-                    >./flowtics-*.AppImage</code
-                  >
-                </li>
-              </ol>
+          <div class="space-y-6" id="installation-instructions">
+            <!-- Loading state -->
+            <div class="text-center text-slate-400">
+              <i class="fas fa-spinner fa-spin mr-2"></i>
+              Loading instructions...
             </div>
           </div>
         </div>

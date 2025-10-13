@@ -1,0 +1,158 @@
+name: Update Release Info
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch: # Allows manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-release-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get release information
+        id: get_release
+        run: |
+          # Get the latest release
+          RELEASE_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/latest")
+
+          echo "Release data fetched"
+          echo "$RELEASE_DATA" > release_temp.json
+
+      - name: Parse release and create JSON
+        uses: actions/github-script@v7
+        id: create_json
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Get release data
+            let release;
+            if (context.payload.release) {
+              release = context.payload.release;
+            } else {
+              // Manual trigger - get latest release
+              const { data } = await github.rest.repos.getLatestRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+              release = data;
+            }
+
+            console.log('Processing release:', release.tag_name);
+
+            const version = release.tag_name.replace(/^v/, '');
+            const assets = release.assets;
+
+            // Platform mapping
+            const platformPatterns = [
+              { regex: /-win-x64\.exe$/, key: 'win-x64', label: 'Windows 64-bit' },
+              { regex: /-win-ia32\.exe$/, key: 'win-ia32', label: 'Windows 32-bit' },
+              { regex: /-win-arm64\.exe$/, key: 'win-arm64', label: 'Windows ARM64' },
+              { regex: /-win\.exe$/, key: 'win-universal', label: 'Windows Universal (32-bit + 64-bit)' },
+              { regex: /-mac-x64\.dmg$/, key: 'mac-x64', label: 'macOS Intel' },
+              { regex: /-mac-arm64\.dmg$/, key: 'mac-arm64', label: 'macOS Apple Silicon (M1/M2/M3)' },
+              { regex: /-linux-x64\.AppImage$/, key: 'linux-x64', label: 'Linux x64 (AppImage)' },
+              { regex: /-linux-arm64\.AppImage$/, key: 'linux-arm64', label: 'Linux ARM64 (AppImage)' },
+              { regex: /-linux-x64\.deb$/, key: 'linux-x64-deb', label: 'Linux x64 (DEB)' },
+              { regex: /-linux-x64\.rpm$/, key: 'linux-x64-rpm', label: 'Linux x64 (RPM)' }
+            ];
+
+            // Get checksums if available
+            let checksums = {};
+            const checksumAsset = assets.find(a => a.name === 'checksums.txt');
+            if (checksumAsset) {
+              try {
+                const checksumResponse = await fetch(checksumAsset.browser_download_url);
+                const checksumText = await checksumResponse.text();
+                
+                // Parse checksums (format: "sha256:HASH  filename")
+                checksumText.split('\n').forEach(line => {
+                  const match = line.match(/sha256:([a-f0-9]+)\s+(.+)/i);
+                  if (match) {
+                    checksums[match[2].trim()] = match[1];
+                  }
+                });
+                console.log('Checksums loaded:', Object.keys(checksums).length);
+              } catch (error) {
+                console.log('Could not fetch checksums:', error.message);
+              }
+            }
+
+            // Process assets
+            const platforms = {};
+            for (const asset of assets) {
+              const name = asset.name;
+              
+              // Skip non-installer files
+              if (name === 'checksums.txt' || name.endsWith('.blockmap') || 
+                  name.endsWith('.yml') || name.endsWith('.json')) {
+                continue;
+              }
+              
+              // Find matching platform
+              for (const pattern of platformPatterns) {
+                if (pattern.regex.test(name)) {
+                  platforms[pattern.key] = {
+                    url: asset.browser_download_url,
+                    checksum: checksums[name] || '',
+                    size: asset.size,
+                    label: pattern.label,
+                    available: true
+                  };
+                  console.log(`Added ${pattern.key}: ${name} (${asset.size} bytes)`);
+                  break;
+                }
+              }
+            }
+
+            // Create release JSON
+            const releaseJson = {
+              version: version,
+              releaseDate: release.published_at || new Date().toISOString(),
+              platforms: platforms,
+              releaseNotes: release.body || 'No release notes available',
+              critical: false,
+              minVersion: version
+            };
+
+            // Write to file
+            fs.writeFileSync('releases/latest.json', JSON.stringify(releaseJson, null, 2));
+            console.log('latest.json created successfully');
+            console.log('Platforms found:', Object.keys(platforms).length);
+
+            return {
+              version: version,
+              platformCount: Object.keys(platforms).length
+            };
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          # Check if there are changes
+          if git diff --quiet releases/latest.json; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git add releases/latest.json
+          git commit -m "chore: update release info for ${{ github.event.release.tag_name || 'latest' }}"
+          git push
+
+      - name: Summary
+        run: |
+          echo "✅ Release information updated successfully!"
+          echo "Version: ${{ steps.create_json.outputs.result }}"
+          echo "Check: https://spafic.github.io/Flowtics-Releases/"

@@ -95,10 +95,19 @@ async function loadReleaseInfo() {
 
     // Check if platforms exist and is an object
     if (data.platforms && typeof data.platforms === "object") {
-      // Group platforms by OS
+      // Group platforms by OS and validate downloads
       for (const [key, platform] of Object.entries(data.platforms)) {
         // Skip if no URL or empty URL
         if (!platform || !platform.url || platform.url.trim() === "") continue;
+
+        // Skip if explicitly marked as unavailable
+        if (platform.available === false) continue;
+
+        // Validate that the URL points to an actual file (not a placeholder)
+        // Check if URL contains a valid file extension and not a placeholder like #
+        const hasValidExtension =
+          /\.(exe|dmg|AppImage|deb|rpm|zip|tar\.gz)$/i.test(platform.url);
+        if (!hasValidExtension || platform.url === "#") continue;
 
         const downloadCard = createDownloadCard(key, platform, data.version);
 
@@ -133,6 +142,27 @@ async function loadReleaseInfo() {
       throw new Error("No release downloads are currently available");
     }
 
+    // Show platform availability notice if some platforms are missing
+    const platformNotice = document.getElementById("platform-notice");
+    const platformNoticeText = document.getElementById("platform-notice-text");
+    const missingPlatforms = [];
+
+    if (!hasWindows) missingPlatforms.push("Windows");
+    if (!hasMac) missingPlatforms.push("macOS");
+    if (!hasLinux) missingPlatforms.push("Linux");
+
+    if (missingPlatforms.length > 0 && platformNotice && platformNoticeText) {
+      platformNoticeText.textContent = `Currently available for limited platforms. ${missingPlatforms.join(
+        ", "
+      )} ${
+        missingPlatforms.length === 1 ? "is" : "are"
+      } not yet available. Check back soon for updates!`;
+      platformNotice.classList.remove("hidden");
+    }
+
+    // Generate dynamic installation instructions
+    generateInstallationInstructions(hasWindows, hasMac, hasLinux);
+
     // Hide loading state and show download buttons
     const loadingState = document.getElementById("loading-state");
     const downloadButtons = document.getElementById("download-buttons");
@@ -159,11 +189,22 @@ function createDownloadCard(key, platform, version) {
 
   const size = platform.size ? formatBytes(platform.size) : "Download";
 
+  // Add checksum display if available
+  const checksumBadge = platform.checksum
+    ? `<div class="text-xs text-gray-400 mt-1 font-mono" title="SHA256 Checksum">
+         <i class="fas fa-shield-alt mr-1"></i>${platform.checksum.substring(
+           0,
+           16
+         )}...
+       </div>`
+    : "";
+
   card.innerHTML = `
     <div class="flex items-center justify-between">
       <div class="flex-1">
         <div class="font-medium text-gray-900">${platform.label || key}</div>
         <div class="text-sm text-gray-500 mt-1">${size}</div>
+        ${checksumBadge}
       </div>
       <div class="ml-4">
         <i class="fas fa-download text-blue-600 text-lg"></i>
@@ -197,16 +238,109 @@ function trackDownload(platform, version) {
   showDownloadNotification(platform);
 }
 
+// Generate installation instructions based on available platforms
+function generateInstallationInstructions(hasWindows, hasMac, hasLinux) {
+  const instructionsContainer = document.getElementById(
+    "installation-instructions"
+  );
+  if (!instructionsContainer) return;
+
+  instructionsContainer.innerHTML = "";
+
+  // Windows instructions
+  if (hasWindows) {
+    const windowsInstructions = document.createElement("div");
+    windowsInstructions.innerHTML = `
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-2 flex items-center">
+          <i class="fab fa-windows text-blue-600 mr-2"></i>
+          Windows
+        </h4>
+        <ol class="list-decimal list-inside text-slate-600 space-y-1 ml-6">
+          <li>Download the .exe installer (choose 64-bit, 32-bit, or Universal)</li>
+          <li>Run the installer and follow the setup wizard</li>
+          <li>Launch Flowtics from your Start menu or desktop shortcut</li>
+        </ol>
+      </div>
+    `;
+    instructionsContainer.appendChild(windowsInstructions);
+  }
+
+  // macOS instructions
+  if (hasMac) {
+    const macInstructions = document.createElement("div");
+    macInstructions.innerHTML = `
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-2 flex items-center">
+          <i class="fab fa-apple text-slate-700 mr-2"></i>
+          macOS
+        </h4>
+        <ol class="list-decimal list-inside text-slate-600 space-y-1 ml-6">
+          <li>Download the .dmg file (Intel or Apple Silicon)</li>
+          <li>Open the .dmg and drag Flowtics to your Applications folder</li>
+          <li>Launch Flowtics from Applications</li>
+          <li>If prompted, allow the app in System Preferences → Security & Privacy</li>
+        </ol>
+      </div>
+    `;
+    instructionsContainer.appendChild(macInstructions);
+  }
+
+  // Linux instructions
+  if (hasLinux) {
+    const linuxInstructions = document.createElement("div");
+    linuxInstructions.innerHTML = `
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-2 flex items-center">
+          <i class="fab fa-linux text-orange-500 mr-2"></i>
+          Linux
+        </h4>
+        <ol class="list-decimal list-inside text-slate-600 space-y-1 ml-6">
+          <li>Download the .AppImage file</li>
+          <li>Make it executable: 
+            <code class="bg-slate-100 px-2 py-1 rounded text-sm">chmod +x flowtics-*.AppImage</code>
+          </li>
+          <li>Run the AppImage: 
+            <code class="bg-slate-100 px-2 py-1 rounded text-sm">./flowtics-*.AppImage</code>
+          </li>
+        </ol>
+      </div>
+    `;
+    instructionsContainer.appendChild(linuxInstructions);
+  }
+
+  // Show section if we have any instructions
+  const installationSection = document.getElementById("installation-section");
+  if (installationSection) {
+    installationSection.style.display =
+      hasWindows || hasMac || hasLinux ? "block" : "none";
+  }
+}
+
 // Show download notification
 function showDownloadNotification(platform) {
+  // Get friendly platform name
+  const platformNames = {
+    "win-x64": "Windows 64-bit",
+    "win-ia32": "Windows 32-bit",
+    "win-arm64": "Windows ARM64",
+    "win-universal": "Windows Universal",
+    "mac-x64": "macOS Intel",
+    "mac-arm64": "macOS Apple Silicon",
+    "linux-x64": "Linux x64",
+    "linux-arm64": "Linux ARM64",
+  };
+
+  const friendlyName = platformNames[platform] || platform;
+
   const notification = document.createElement("div");
   notification.className =
-    "fixed bottom-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-2xl z-50 flex items-center space-x-3 animate-fade-in";
+    "fixed bottom-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-2xl z-50 flex items-center space-x-3 animate-fade-in max-w-sm";
   notification.innerHTML = `
         <i class="fas fa-check-circle text-2xl"></i>
         <div>
             <div class="font-semibold">Download Started!</div>
-            <div class="text-sm text-green-100">Your ${platform} installer is downloading...</div>
+            <div class="text-sm text-green-100">${friendlyName} installer is downloading...</div>
         </div>
     `;
 
