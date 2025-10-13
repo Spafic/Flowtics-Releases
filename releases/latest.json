@@ -1,45 +1,30 @@
 {
   "version": "1.0.0",
-  "releaseDate": "2025-10-11T10:00:00Z",
+  "releaseDate": "2025-10-13T19:00:03Z",
   "platforms": {
-    "win-x64": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-x64.exe",
-      "checksum": "",
-      "size": 0,
-      "label": "Windows 64-bit"
-    },
     "win-ia32": {
       "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-ia32.exe",
-      "checksum": "",
-      "size": 0,
-      "label": "Windows 32-bit"
+      "checksum": "96f34ed7ac4e217ac164d00c0dcd15014fb90971ec98d3344b6387a407b98aa6",
+      "size": 155805369,
+      "label": "Windows 32-bit",
+      "available": true
     },
-    "win-arm64": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-arm64.exe",
-      "checksum": "",
-      "size": 0,
-      "label": "Windows ARM64"
+    "win-x64": {
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-x64.exe",
+      "checksum": "3e6a8da456ddf0c91af2d235e0f982b98867dcc40bca925031606362c8450bfd",
+      "size": 161874094,
+      "label": "Windows 64-bit",
+      "available": true
     },
-    "mac-x64": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-mac-x64.dmg",
-      "checksum": "",
-      "size": 0,
-      "label": "macOS Intel"
-    },
-    "mac-arm64": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-mac-arm64.dmg",
-      "checksum": "",
-      "size": 0,
-      "label": "macOS Apple Silicon"
-    },
-    "linux-x64": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-linux-x64.AppImage",
-      "checksum": "",
-      "size": 0,
-      "label": "Linux x64"
+    "win-universal": {
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win.exe",
+      "checksum": "3224c16406849a352dc2cc1864a4716f556c9c366388bdb34ad88952ba93075f",
+      "size": 317069402,
+      "label": "Windows Universal (32-bit + 64-bit)",
+      "available": true
     }
   },
-  "releaseNotes": "Initial stable release with core inventory management features.",
+  "releaseNotes": "From HR to Finance - Flowtics brings your business under one roof, ticking with precision.\r\n© All rights reserved.\r\n\r\nDeveloped by: \r\n- @Spafic \r\n- @ashmod \r\n- @Lucifer3224 \r\n- @actions-user  - 🛠️ our tireless CI/CD sidekick",
   "critical": false,
   "minVersion": "1.0.0"
 }
