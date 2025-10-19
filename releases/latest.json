@@ -1,30 +1,30 @@
 {
-  "version": "1.0.0",
-  "releaseDate": "2025-10-13T19:00:03Z",
+  "version": "1.0.1",
+  "releaseDate": "2025-10-19T14:47:46Z",
   "platforms": {
     "win-ia32": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-ia32.exe",
-      "checksum": "96f34ed7ac4e217ac164d00c0dcd15014fb90971ec98d3344b6387a407b98aa6",
-      "size": 155805369,
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.1/flowtics-v1.0.1-win-ia32.exe",
+      "checksum": "b6eee5a3ae8fd3170d1e1e1074f524e3bf4fc64e5c598b645107fd1c7e52c60e",
+      "size": 155821524,
       "label": "Windows 32-bit",
       "available": true
     },
     "win-x64": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win-x64.exe",
-      "checksum": "3e6a8da456ddf0c91af2d235e0f982b98867dcc40bca925031606362c8450bfd",
-      "size": 161874094,
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.1/flowtics-v1.0.1-win-x64.exe",
+      "checksum": "e612857639d5913999ed37ceb87015af1a764625587534cf8b3584cc88114658",
+      "size": 161890180,
       "label": "Windows 64-bit",
       "available": true
     },
     "win-universal": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.0/flowtics-v1.0.0-win.exe",
-      "checksum": "3224c16406849a352dc2cc1864a4716f556c9c366388bdb34ad88952ba93075f",
-      "size": 317069402,
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.1/flowtics-v1.0.1-win.exe",
+      "checksum": "7dffcd18298221a0466c98c78acf1e2d562aba69e63350cf6c50136ea3da7c17",
+      "size": 317101643,
       "label": "Windows Universal (32-bit + 64-bit)",
       "available": true
     }
   },
-  "releaseNotes": "From HR to Finance - Flowtics brings your business under one roof, ticking with precision.\r\n© All rights reserved.\r\n\r\nDeveloped by: \r\n- @Spafic \r\n- @ashmod \r\n- @Lucifer3224 \r\n- @actions-user  - 🛠️ our tireless CI/CD sidekick",
+  "releaseNotes": "## Release Notes\r\nThis release contains significant UI/UX enhancements and critical bug fixes to improve overall system performance and user experience.\r\n\r\n© All rights reserved.",
   "critical": false,
-  "minVersion": "1.0.0"
+  "minVersion": "1.0.1"
 }
