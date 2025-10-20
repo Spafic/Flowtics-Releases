@@ -1,30 +1,30 @@
 {
-  "version": "1.0.1",
-  "releaseDate": "2025-10-19T14:47:46Z",
+  "version": "1.0.2",
+  "releaseDate": "2025-10-20T12:43:27Z",
   "platforms": {
     "win-ia32": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.1/flowtics-v1.0.1-win-ia32.exe",
-      "checksum": "b6eee5a3ae8fd3170d1e1e1074f524e3bf4fc64e5c598b645107fd1c7e52c60e",
-      "size": 155821524,
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.2/flowtics-v1.0.2-win-ia32.exe",
+      "checksum": "bf9ccd18a0240d53ba61a13e130b4b021e17b3463c410f31caf7890e6627d819",
+      "size": 168086252,
       "label": "Windows 32-bit",
       "available": true
     },
     "win-x64": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.1/flowtics-v1.0.1-win-x64.exe",
-      "checksum": "e612857639d5913999ed37ceb87015af1a764625587534cf8b3584cc88114658",
-      "size": 161890180,
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.2/flowtics-v1.0.2-win-x64.exe",
+      "checksum": "4d64ccd20e792b541661a269dad91d6c2aa9eb6d3b485b437cd448e85bafe7ba",
+      "size": 174154876,
       "label": "Windows 64-bit",
       "available": true
     },
     "win-universal": {
-      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.1/flowtics-v1.0.1-win.exe",
-      "checksum": "7dffcd18298221a0466c98c78acf1e2d562aba69e63350cf6c50136ea3da7c17",
-      "size": 317101643,
+      "url": "https://github.com/Spafic/Flowtics-Releases/releases/download/v1.0.2/flowtics-v1.0.2-win.exe",
+      "checksum": "0a395013b6f3d132c3c78ffbef1cc4e0e84dbd565b891dd4daae82499fbd7813",
+      "size": 341631135,
       "label": "Windows Universal (32-bit + 64-bit)",
       "available": true
     }
   },
-  "releaseNotes": "## Release Notes\r\nThis release contains significant UI/UX enhancements and critical bug fixes to improve overall system performance and user experience.\r\n\r\n© All rights reserved.",
+  "releaseNotes": "Enhancement in UI/UX",
   "critical": false,
-  "minVersion": "1.0.1"
+  "minVersion": "1.0.2"
 }
